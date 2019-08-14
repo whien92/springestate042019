@@ -1,7 +1,13 @@
-package com.vvhien.entity;
+     package com.vvhien.entity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +25,12 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "status")
 	private String status;
 	
+	@ManyToMany
+	@JoinTable(name = "user_role", 
+				joinColumns = @JoinColumn(name = "user_id"), 
+				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	
+	private List<RoleEntity> roles = new ArrayList<>();
 	
 	public String getUserName() {
 		return userName;
@@ -44,6 +56,12 @@ public class UserEntity extends BaseEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
+	}
 	
-	
+	  
 }
